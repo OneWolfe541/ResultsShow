@@ -1,0 +1,81 @@
+﻿
+    @* Navbar colors are defined in bootstrap.css under #NavColor *@
+
+<div class="navbar navbar-inverse navbar-fixed-top" style="background-color:white; border-bottom-width:0px; border-bottom-color:white;">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href='@Url.Action("Index", "Home")' class="navbar-brand" style="">
+                <img src='@Url.Content("~/Images/AESLogo-2016 001 a.png")' />
+            </a>
+        </div>
+
+        <div class="nav nav-pills navbar-collapse collapse" style="margin-bottom:12px; font-size:18px;">
+            @if (Session["UserID"] != null)
+            {
+                <ul class="nav navbar-nav">
+                    @if (Session["ePollBook"].ToString() == "True")
+                    {
+                    <li style="margin:0 0 0 -10px;">@Html.ActionLink("Voter Lookup", "Search", "Voter")</li>
+                    }
+                    @if (Session["Absentee"].ToString() == "True")
+                    {
+                        <li style="margin:0 0 0 -10px;">@Html.ActionLink("Absentee", "Search", "Absentee")</li>
+                    }
+                    @if (Session["Registration"].ToString() == "True")
+                    {
+                        <li style="margin:0 0 0 -10px;">@Html.ActionLink("Registration", "Search", "Registration")</li>
+                    }
+                    @if (Session["ShowEDRoster"].ToString() == "True")
+                    {
+                        <li style="margin:0 0 0 -15px;">@Html.ActionLink("Roster", "RosterSearch", "Voter")</li>
+                    }
+                    @if (Session["SiteSummary"].ToString() == "True")
+                    {
+                        <li style="margin:0 0 0 -15px;">@Html.ActionLink("Summary", "SiteSummary", "Stats")</li>
+                    }
+                    @if (Session["ShowEDActivity"].ToString() == "True")
+                    {
+                        <li style="margin:0 0 0 -15px;">@Html.ActionLink("Activity", "Counts", "Stats")</li>
+                    }
+                    @if (Session["AllElectionCharts"].ToString() == "True")
+                    {
+                        <li style="margin:0 0 0 -15px;">@Html.ActionLink("All Activity", "AllVoterCounts", "Stats")</li>
+                    }
+
+                    <li style="margin:0 0 0 -10px;">@Html.ActionLink("Enter Votes", "Votes", "Show")</li>
+                    <li style="margin:0 0 0 -10px;">@Html.ActionLink("Show", "Index", "Show")</li>
+                    <li style="margin:0 0 0 -10px;">@Html.ActionLink("Reports", "Index", "Report")</li>
+
+                    @* Admins, Devs and SuperUsers can view these links*@
+                    @if (Convert.ToInt32(Session["RoleID"]) > 1)
+                    {
+                    <li class="dropdown" style="margin:0 0 0 -15px;">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Manage</a>
+                        <ul class="dropdown-menu">
+                            @* Admins and Devs can view these links*@
+                            @if (Convert.ToInt32(Session["RoleID"]) == 3)
+                            {
+                                <li><hr style="margin-bottom:0;" /></li>
+                                <li>@Html.ActionLink("Configure", "Configure", "Manage")</li>
+                                <li>@Html.ActionLink("Setup", "Setup", "Manage")</li>
+                            }
+                        </ul>
+                    </li>
+                    }                                        
+                    @*<li>&nbsp;</li>
+                    <li>&nbsp;</li>
+                    <li>
+                        <a href="#" id="registerLink">@Session["Username"].ToString()</a>
+                    </li>
+                    <li style="margin:0 0 0 -15px;">@Html.ActionLink("Log out", "Logout", "Home")</li>*@
+                </ul>
+            }
+            @Html.Partial("_NavLoginPartial")
+        </div>
+    </div>
+</div>

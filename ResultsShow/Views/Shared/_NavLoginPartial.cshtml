@@ -1,0 +1,20 @@
+﻿@if (Session["UserID"] != null)
+{
+    using (Html.BeginForm("Logout", "Home", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a href="#" id="registerLink">@Session["Username"].ToString()</a>
+            </li>
+            <li>@Html.ActionLink("Log out", "Logout", "Home")</li>
+        </ul>
+    }
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li>@Html.ActionLink("Log in", "Login", "Home")</li>
+    </ul>
+}

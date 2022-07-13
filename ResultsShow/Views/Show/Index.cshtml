@@ -1,0 +1,359 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_ShowLayoutPublic.cshtml";
+}
+
+<style>
+    .mySlides {
+        display: none;
+    }
+
+    /* Slideshow container */
+    .slideshow-container {
+        max-width: 1000px;
+        position: relative;
+        margin: auto;
+    }
+
+    /* Caption text */
+    .show-text {
+        color: #f2f2f2;
+        font-size: 15px;
+        padding: 8px 12px;
+        position: absolute;
+        bottom: 8px;
+        width: 100%;
+        text-align: center;
+    }
+
+    /* Number text (1/3 etc) */
+    .numbertext {
+        color: #f2f2f2;
+        font-size: 12px;
+        padding: 8px 12px;
+        position: absolute;
+        top: 0;
+    }
+
+    /* The dots/bullets/indicators */
+    .dot {
+        height: 13px;
+        width: 13px;
+        margin: 0 2px;
+        background-color: #bbb;
+        border-radius: 50%;
+        display: inline-block;
+        transition: background-color 0.6s ease;
+    }
+
+    .active {
+        background-color: #717171;
+    }
+
+    /* Fading animation */
+    .show-fade {
+        -webkit-animation-name: fade;
+        /*-webkit-animation-delay: 5s;*/
+        -webkit-animation-duration: 4s;
+        animation-name: fade;
+        /*animation-delay: 5s;*/
+        animation-duration: 4s;
+    }
+
+    @@-webkit-keyframes fade {
+        from {
+            opacity: 0.05;
+        }
+
+        to {
+            opacity: 1.05;
+        }
+    }
+
+    @@keyframes fade {
+        from {
+            opacity: 0.05;
+        }
+
+        to {
+            opacity: 1;
+        }
+    }
+
+    /* On smaller screens, decrease text size */
+    @@media only screen and (max-width: 300px) {
+        .text {
+            font-size: 11px;
+        }
+    }
+</style>
+
+<br />
+
+<table style="width:100%;">
+    <tr>
+        <td style="width:300px; font-size:14px; text-align:center;">
+            <img src="~/Images/NavajoElectionBoard.png" height="150" width="150" />
+            <div>Under the auspices of the</div>
+            <div>NAVAJO ELECTION ADMINISTRATION</div>            
+        </td>
+        <td style="text-align:center;">
+            <div style="border:1px solid gray; background-color:khaki; border-radius:4px; font-size:22px;">
+                UNOFFICIAL ELECTION NIGHT RESULTS
+            </div>
+
+            <h3 style="text-decoration:underline; font-size:26px;">
+                @ViewBag.ElectionDate
+            </h3>
+
+            <h2 style="font-weight:bold; font-size:42px;">NAVAJO NATION</h2>
+            <h2 style="font-weight:bold; font-size:42px;">STIMULUS REFERENDUM</h2>
+        </td>
+    </tr>
+</table>
+<br />
+
+<div class="slideshow-container">
+    <div id="Slide_1" class="mySlides show-fade col-md-11" style="font-size:100px;">
+        <div class="row">
+            <div style="width:350px; float:left; border:1px solid gray; padding-left:20px;">
+                YES 
+            </div>
+            <div style="width:480px; float:right; border:1px solid gray; text-align:right; padding-right:20px;">
+                @ViewBag.YesTotal
+            </div>
+        </div>
+
+        <div class="row">
+            <div style="width:350px; float:left; border:1px solid gray; padding-left:20px;">
+                NO
+            </div>
+            <div style="width:480px; float:right; border:1px solid gray; text-align:right; padding-right:20px;">
+                @ViewBag.NoTotal
+            </div>
+        </div>
+    </div>
+
+    <div id="Slide_2" class="mySlides show-fade col-md-12" style="font-size:100px;">
+        <div class="row">
+            <div style="width:320px; float:left; border:1px solid gray; padding-left:20px;">
+                YES
+            </div>
+            <div style="width:550px; float:right; border:1px solid gray; text-align:right; padding-right:10px;">
+                @ViewBag.YesPercent%
+            </div>
+        </div>
+
+        <div class="row">
+            <div style="width:320px; float:left; border:1px solid gray; padding-left:20px;">
+                NO
+            </div>
+            <div style="width:550px; float:right; border:1px solid gray; text-align:right; padding-right:10px;">
+                @ViewBag.NoPercent%
+            </div>
+        </div>
+    </div>
+
+    <div id="Slide_3" class="mySlides show-fade">
+        <table style="width:100%; font-size:42px;">
+            <tr>
+                <td style="width:300px;">Chinle</td>
+                <td style="width:100px; border:1px solid gray; padding-left:5px;">
+                    YES
+                </td>
+                <td style="border:1px solid gray; text-align:right; padding-right:10px;">
+                    @ViewBag.ChinleYes
+                </td>
+                <td></td>
+                <td style="width:100px; border:1px solid gray; padding-left:5px;">
+                    NO
+                </td>
+                <td style="border:1px solid gray; text-align:right; padding-right:10px;">
+                    @ViewBag.ChinleNo
+                </td>
+            </tr>
+            <tr>
+                <td style="width:300px;">Eastern</td>
+                <td style="width:100px; border:1px solid gray; padding-left:5px;">
+                    YES
+                </td>
+                <td style="border:1px solid gray; text-align:right; padding-right:10px;">
+                    @ViewBag.EasternYes
+                </td>
+                <td></td>
+                <td style="width:100px; border:1px solid gray; padding-left:5px;">
+                    NO
+                </td>
+                <td style="border:1px solid gray; text-align:right; padding-right:10px;">
+                    @ViewBag.EasternNo
+                </td>
+            </tr>
+            <tr>
+                <td style="width:300px;">Fort Defiance</td>
+                <td style="width:100px; border:1px solid gray; padding-left:5px;">
+                    YES
+                </td>
+                <td style="border:1px solid gray; text-align:right; padding-right:10px;">
+                    @ViewBag.FortDefianceYes
+                </td>
+                <td></td>
+                <td style="width:100px; border:1px solid gray; padding-left:5px;">
+                    NO
+                </td>
+                <td style="border:1px solid gray; text-align:right; padding-right:10px;">
+                    @ViewBag.FortDefianceNo
+                </td>
+            </tr>
+            <tr>
+                <td style="width:300px;">Northern</td>
+                <td style="width:100px; border:1px solid gray; padding-left:5px;">
+                    YES
+                </td>
+                <td style="border:1px solid gray; text-align:right; padding-right:10px;">
+                    @ViewBag.NorthernYes
+                </td>
+                <td></td>
+                <td style="width:100px; border:1px solid gray; padding-left:5px;">
+                    NO
+                </td>
+                <td style="border:1px solid gray; text-align:right; padding-right:10px;">
+                    @ViewBag.NorthernNo
+                </td>
+            </tr>
+            <tr>
+                <td style="width:300px;">Western</td>
+                <td style="width:100px; border:1px solid gray; padding-left:5px;">
+                    YES
+                </td>
+                <td style="border:1px solid gray; text-align:right; padding-right:10px;">
+                    @ViewBag.WesternYes
+                </td>
+                <td></td>
+                <td style="width:100px; border:1px solid gray; padding-left:5px;">
+                    NO
+                </td>
+                <td style="border:1px solid gray; text-align:right; padding-right:10px;">
+                    @ViewBag.WesternNo
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div id="Slide_4" class="mySlides show-fade">
+        <table style="width:100%; font-size:42px;">
+            <tr>
+                <td style="width:300px;">Chinle</td>
+                <td>
+                    <div style="background-color:lightgray; width:100%; border:1px solid black; padding:0; height:47px; margin-top:3px; border-radius:6px;">
+                        <div class="progress-bar progress-bar-info"
+                                role="progressbar"
+                                aria-valuenow="@ViewBag.ChinleP"
+                                aria-valuemin="0"
+                                aria-valuemax="100"
+                                style="width:@ViewBag.ChinleP%; height:45px; font-size:32px; padding-top:2px; border-radius:6px;">
+                            <div style="margin-left:5px; width:200px;">@ViewBag.Chinle of @ViewBag.ChinleT</div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td style="width:300px;">Eastern</td>
+                <td>
+                    <div style="background-color:lightgray; width:100%; border:1px solid black; padding:0; height:47px; margin-top:3px; border-radius:6px;">
+                        <div class="progress-bar progress-bar-info"
+                                role="progressbar"
+                                aria-valuenow="@ViewBag.EasternP"
+                                aria-valuemin="0"
+                                aria-valuemax="100"
+                                style="width:@ViewBag.EasternP%; height:45px; font-size:32px; padding-top:2px; border-radius:6px;">
+                            <div style="margin-left:5px; width:200px;">@ViewBag.Eastern of @ViewBag.EasternT</div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td style="width:300px;">Fort Defiance</td>
+                <td>
+                    <div style="background-color:lightgray; width:100%; border:1px solid black; padding:0; height:47px; margin-top:3px; border-radius:6px;">
+                        <div class="progress-bar progress-bar-info"
+                                role="progressbar"
+                                aria-valuenow="@ViewBag.FortDefianceP"
+                                aria-valuemin="0"
+                                aria-valuemax="100"
+                                style="width:@ViewBag.FortDefianceP%; height:45px; font-size:32px; padding-top:2px; border-radius:6px;">
+                            <div style="margin-left:5px; width:200px;">@ViewBag.FortDefiance of @ViewBag.FortDefianceT</div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td style="width:300px;">Northern</td>
+                <td>
+                    <div style="background-color:lightgray; width:100%; border:1px solid black; padding:0; height:47px; margin-top:3px; border-radius:6px;">
+                        <div class="progress-bar progress-bar-info"
+                                role="progressbar"
+                                aria-valuenow="@ViewBag.NorthernP"
+                                aria-valuemin="0"
+                                aria-valuemax="100"
+                                style="width:@ViewBag.NorthernP%; height:45px; font-size:32px; padding-top:2px; border-radius:6px;">
+                            <div style="margin-left:5px; width:200px;">@ViewBag.Northern of @ViewBag.NorthernT</div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td style="width:300px;">Western</td>
+                <td>
+                    <div style="background-color:lightgray; width:100%; border:1px solid black; padding:0; height:47px; margin-top:3px; border-radius:6px;">
+                        <div class="progress-bar progress-bar-info"
+                                role="progressbar"
+                                aria-valuenow="@ViewBag.WesternP"
+                                aria-valuemin="0"
+                                aria-valuemax="100"
+                                style="width:@ViewBag.WesternP%; height:45px; font-size:32px; padding-top:2px; border-radius:6px;">
+                            <div style="margin-left:5px; width:200px;">@ViewBag.Western of @ViewBag.WesternT</div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<div style="float:none; clear:both;"></div>
+
+<br /><br />
+
+<div style="text-align:center">
+    <span id="dot1" class="dot"></span>
+    <span id="dot2" class="dot"></span>
+    <span id="dot3" class="dot"></span>
+    <span id="dot4" class="dot"></span>
+</div>
+
+
+
+@section scripts{
+    <script type="text/javascript">
+        var slideIndex = 0;
+        $(function () {
+            SlideShow(1);
+        });
+
+        var SlideShow = function (index) {
+            if (index > 4) {
+                index = 1;
+                window.location.replace("/navajoshow/Show/Index");
+                return;
+            }
+            $('#Slide_' + index).show();
+            $('#dot' + index).addClass('active');
+            setTimeout(function () {
+                $('#Slide_' + index).hide();
+                $('#dot' + index).removeClass('active');
+                SlideShow(index + 1)
+            }, 12000); // Change image every 8 seconds
+        };
+    </script>
+}

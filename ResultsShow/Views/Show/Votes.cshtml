@@ -1,0 +1,144 @@
+﻿@model IEnumerable<ResultsShow.Models.vShowVote>
+
+@{
+    ViewBag.Title = "Call in Votes";
+}
+
+<h2>Call in Votes</h2>
+
+<br />
+
+<div class="row">
+    <div class="form-group">
+        <label class="control-label col-md-2" for="ChapterNo">Chapter Search</label>
+        <div class="col-md-1">
+            <input class="form-control text-box single-line" id="ChapterSearch" value="@ViewBag.Chapter" />
+        </div>
+        <div class="col-md-2">
+            <a id="btnGo" href="#" class="btn btn-success" onclick="LoadVotes()">Go</a>
+        </div>
+    </div>
+</div>
+
+<br />
+
+<hr />
+
+<div class="row">
+    <div class="col-md-6">
+        <h3>
+            @Model.FirstOrDefault().AgencyName
+            -
+            @Model.FirstOrDefault().ChapterNo
+            -
+            @Model.FirstOrDefault().ChapterName
+        </h3>
+    </div>
+</div>
+
+<br />
+
+<table class="table">
+
+    <tr>
+        <th style="border:0 none white;">
+            Question
+        </th>
+        <th style="border:0 none white;">
+            Registered Voters
+        </th>
+        <th style="border:0 none white;">
+            Ballots Cast
+        </th>
+        <th style="border:0 none white;">
+            Yes
+        </th>
+        <th style="border:0 none white;">
+            No
+        </th>
+        <th style="border:0 none white;">
+
+        </th>
+    </tr>
+    
+
+@foreach (var item in Model)
+{
+    
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RegisteredVoters)
+        </td>
+
+        <td class="col-md-2">
+            @Html.EditorFor(modelItem => item.BallotsCast, new { htmlAttributes = new { @class = "form-control col-md-2", id = "Ballots_" + @item.ChapterNo + @item.OfficeId, onblur = "SaveVotes(" + @item.ChapterId + ",'" + @item.ChapterNo + "'," + @item.OfficeId + ")" } })
+        </td>
+
+        <td class="col-md-2">
+            @Html.EditorFor(modelItem => item.VotesYes, new { htmlAttributes = new { @class = "form-control col-md-2", id = "VotesYes_" + @item.ChapterNo + @item.OfficeId, onblur = "SaveVotes(" + @item.ChapterId + ",'" + @item.ChapterNo + "'," + @item.OfficeId + ")" } })
+        </td>
+
+        <td class="col-md-2">
+            @Html.EditorFor(modelItem => item.VotesNo, new { htmlAttributes = new { @class = "form-control col-md-2", id = "VotesNo_" + @item.ChapterNo + @item.OfficeId, onblur = "SaveVotes(" + @item.ChapterId + ",'" + @item.ChapterNo + "'," + @item.OfficeId + ")" } })
+        </td>
+
+        <td>
+            <a id="btnSave_@item.ChapterNo@item.OfficeId" href="#" class="btn btn-success" onclick="SaveVotes(@item.ChapterId,'@item.ChapterNo',@item.OfficeId)">Save</a>
+        </td>
+    </tr>
+}
+
+</table>
+
+@section scripts{
+    <script type="text/javascript">
+
+        // Load the chapter number entered by user
+        var LoadVotes = function () {
+            console.log($("#ChapterSearch").val());
+            window.location.replace("/navajoshow/Show/Votes?chapter=" + $("#ChapterSearch").val());
+        };
+
+        // Run search function when 'Enter' is pressed
+        $(function () {
+            $('#ChapterSearch').keydown(function (e) {
+                if (e.keyCode == 13) {
+                    LoadVotes();
+                }
+            });
+        });
+
+        var SaveVotes = function (chapterId, chapterNo, officeId) {
+            var id = chapterNo + officeId;
+            var ballots = $('#Ballots_' + id).val();
+            var voteyes = $('#VotesYes_' + id).val();
+            var voteno = $('#VotesNo_' + id).val();
+
+            //$('#btnSave_' + id).text('Saving...');
+            $('#btnSave_' + id).removeClass('btn-success');
+            $('#btnSave_' + id).addClass('btn-warning');
+
+            $.ajax({
+                type: "POST",
+                url: "/navajoshow/Show/SaveVotes",
+                data: {
+                    chapterId: chapterId,
+                    officeId: officeId,
+                    ballots: ballots,
+                    vyes: voteyes,
+                    vno: voteno
+                },
+                success: function (response) {
+                    //console.log(response);
+                    //$('#btnSave_' + id).text('Save');
+                    $('#btnSave_' + id).addClass('btn-success');
+                    $('#btnSave_' + id).removeClass('btn-warning');
+                }
+            });
+        }
+
+    </script>
+}

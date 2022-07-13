@@ -1,0 +1,42 @@
+﻿<Chart 
+    BackColor="white" 
+    BorderColor="white"
+    BorderlineDashStyle="Solid" 
+    BorderWidth="0"
+    Palette="BrightPastel">
+  <Series>
+    <Series 
+      Name="Voters" 
+      IsValueShownAsLabel="True" 
+      ShadowColor="gray" 
+      ShadowOffset="2" 
+      LabelBackColor="white"
+      Color="silver"
+      BorderColor="slategray"
+      BorderWidth="1" 
+      Palette="grayscale"></Series>
+  </Series>
+  <ChartAreas>
+    <ChartArea 
+      Name="Default" 
+      _Template_="All" 
+      BackColor="white" 
+      BorderColor="64, 64, 64, 64" 
+      BorderDashStyle="Solid" 
+      ShadowColor="white" />
+    <AxisX
+      Interval="1"
+      IsValueShownAsLabel="True">    
+    </AxisX>
+    <AxisY>      
+    </AxisY>
+  </ChartAreas>
+  <Legends>
+    <Legend 
+      _Template_="All" 
+      BackColor="Transparent" 
+      Font="Trebuchet MS, 8.25pt, style=Bold" 
+      IsTextAutoFit="False" />
+  </Legends>
+  <BorderSkin />
+</Chart>
